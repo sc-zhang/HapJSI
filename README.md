@@ -1,7 +1,7 @@
-# HapJSI: A tool for comparing regions jaccard similarity among haplotypes of chromosomes
+# HapJSI: A tool for calculating jaccard similarity among haplotypes regions within chromosome groups
 
 ## Introduction
-HapJSI (**Hap**lotype **J**accard **S**imilarity **I**dentifier) is a tools for calculating jaccard similarity with kmers in haplotype regions using sliding windows.
+HapJSI (**Hap**lotype **J**accard **S**imilarity **I**dentifier) is a tools for calculating jaccard similarity using kmers of haplotype regions with sliding windows.
 
 ## Installation
 ```bash
