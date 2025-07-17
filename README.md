@@ -8,6 +8,9 @@ HapJSI (**Hap**lotype **J**accard **S**imilarity **I**dentifier) is a tools for 
 cd /path/to/install
 git clone https://github.com/sc-zhang/HapJSI.git
 chmod +x HapJSI/hapjsi.py
+cd HapJSI
+pip install -r requirements.txt
+
 # Optional
 echo 'export PATH=/path/to/install/HapJSI:$PATH' >> ~/.bash_profile
 source ~/.bash_profile
