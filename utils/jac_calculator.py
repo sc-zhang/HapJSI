@@ -32,7 +32,9 @@ def kmer_jac(kmer_file1, rev_kmer_file1, kmer_file2):
         * 1.0
         / (len(kmer_rev_set1.union(kmer_set2)))
     )
-    return jac if jac > jac_rev else -jac_rev
+
+    # positive first
+    return jac if jac >= jac_rev else -jac_rev
 
 
 def gen_kmer_file(sid, seq, wsize, ssize, k, out_dir):
