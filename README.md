@@ -18,24 +18,26 @@ source ~/.bash_profile
 
 ## Usage
 ```bash
-usage: hapjsi.py [-h] -g GENOME -l LIST [-w WINDOW] [-s STEP] [-k K] -o OUTPUT [--cmap CMAP] [--fmt FMT] [--log_scale] [-t THREADS]
+usage: hapjsi.py [-h] -g GENOME -l LIST [-w WINDOW] [-s STEP] [-k K] [--method {exact,sample}] [--sample_ratio SAMPLE_RATIO] -o OUTPUT [--cmap CMAP] [--fmt FMT] [--log_scale] [-t THREADS] [--verbose]
 
 options:
   -h, --help            show this help message and exit
-  -g GENOME, --genome GENOME
-                        Input genome file
-  -l LIST, --list LIST  Haplotype group file, contain two columns: Chromosome Haplotype
-  -w WINDOW, --window WINDOW
-                        Window size, could be scientific notation, default=1e6
-  -s STEP, --step STEP  Step size, could be scientific notation, default=5e5
+  -g, --genome GENOME   Input genome file
+  -l, --list LIST       Haplotype group file, contain two columns: Chromosome Haplotype
+  -w, --window WINDOW   Window size, could be scientific notation, default=1e6
+  -s, --step STEP       Step size, could be scientific notation, default=5e5
   -k K                  k size of kmer, default=21
-  -o OUTPUT, --output OUTPUT
-                        Output directory
+  --method {exact,sample}
+                        Method for calculating jaccard similarity, could be exact or sample, default=exact
+  --sample_ratio SAMPLE_RATIO
+                        Sample ratio for calculating, default=0.1
+  -o, --output OUTPUT   Output directory
   --cmap CMAP           CMAP for drawing heatmap, default="RdBu_r"
   --fmt FMT             Heatmap file format, default="pdf"
   --log_scale           If set, heatmap would be scaled with log10(jaccard similarity * 100+1)
-  -t THREADS, --threads THREADS
+  -t, --threads THREADS
                         Threads, default=10
+  --verbose             Print detail information
 ```
 > Jaccard Similarity is defined as:  
 > $$Jaccard\ Similarity=\frac{{A}\bigcap{B}}{{A}\bigcup{B}}$$  

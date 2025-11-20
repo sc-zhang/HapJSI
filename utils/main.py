@@ -28,6 +28,18 @@ def get_opts():
         default=5e5,
     )
     group.add_argument("-k", help="k size of kmer, default=21", type=int, default=21)
+    group.add_argument(
+        "--method",
+        help="Method for calculating jaccard similarity, could be exact or sample, default=exact",
+        choices=["exact", "sample"],
+        default="exact",
+    )
+    group.add_argument(
+        "--sample_ratio",
+        help="Sample ratio for calculating, default=0.1",
+        type=float,
+        default=0.1,
+    )
     group.add_argument("-o", "--output", help="Output directory", required=True)
     group.add_argument(
         "--cmap", help='CMAP for drawing heatmap, default="RdBu_r"', default="RdBu_r"
@@ -43,6 +55,9 @@ def get_opts():
     group.add_argument(
         "-t", "--threads", help="Threads, default=10", type=int, default=10
     )
+    group.add_argument(
+        "--verbose", help="Print detail information", action="store_true"
+    )
     return group.parse_args()
 
 
@@ -53,11 +68,14 @@ def main():
     wsize = int(opts.window)
     ssize = int(opts.step)
     k = opts.k
+    calc_method = opts.method
+    sample_ratio = opts.sample_ratio
     out_dir = opts.output
     cmap = opts.cmap
     pic_fmt = opts.fmt
     log_scale = opts.log_scale
     threads = opts.threads
+    verbose = opts.verbose
 
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
@@ -68,7 +86,16 @@ def main():
         Message.info("Jac file found, skipping...")
     else:
         jac_calculator.win_kmer_jac_similarity(
-            genome, group_list, wsize, ssize, k, out_dir, threads
+            genome,
+            group_list,
+            wsize,
+            ssize,
+            k,
+            sample_ratio,
+            out_dir,
+            threads,
+            calc_method,
+            verbose,
         )
 
     out_pic_dir = os.path.join(out_dir, "pic")
