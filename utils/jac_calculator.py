@@ -38,7 +38,11 @@ def reverse_seq(seq):
     return "".join(rev_seq)
 
 
-def gen_kmer(seq, k, sample_ratio=1.0):
+def gen_kmer(seq, k, sample_ratio=1.0, sample_seed=None):
+    if not sample_seed:
+        random.seed()
+    else:
+        random.seed(sample_seed)
     kmer_set = set()
     for i in range(len(seq) - k + 1):
         if random.random() < sample_ratio:
@@ -46,15 +50,15 @@ def gen_kmer(seq, k, sample_ratio=1.0):
     return kmer_set
 
 
-def calc_jaccard(hap1, sp1, ep1, hap2, sp2, ep2, k, sample_ratio, verbose):
+def calc_jaccard(hap1, sp1, ep1, hap2, sp2, ep2, k, sample_ratio, sample_seed, verbose):
     if verbose:
         Message.info(
             "\tComparing %s: %d-%d, %s: %d-%d"
             % (hap1, sp1 + 1, ep1, hap2, sp2 + 1, ep2)
         )
-    kmer_set1 = gen_kmer(GENOME_DB.get(hap1)[sp1:ep1], k, sample_ratio)
-    kmer_rev_set1 = gen_kmer(reverse_seq(GENOME_DB.get(hap1)[sp1:ep1]), k, sample_ratio)
-    kmer_set2 = gen_kmer(GENOME_DB.get(hap2)[sp2:ep2], k, sample_ratio)
+    kmer_set1 = gen_kmer(GENOME_DB.get(hap1)[sp1:ep1], k, sample_ratio, sample_seed)
+    kmer_rev_set1 = gen_kmer(reverse_seq(GENOME_DB.get(hap1)[sp1:ep1]), k, sample_ratio, sample_seed)
+    kmer_set2 = gen_kmer(GENOME_DB.get(hap2)[sp2:ep2], k, sample_ratio, sample_seed)
 
     try:
         jac = len(kmer_set1 & kmer_set2) * 1.0 / (len(kmer_set1 | kmer_set2))
@@ -78,6 +82,7 @@ def win_kmer_jac_similarity(
     ssize,
     k,
     sample_ratio,
+    sample_seed,
     out_dir,
     threads,
     method="exact",
@@ -124,6 +129,7 @@ def win_kmer_jac_similarity(
                         ep2,
                         k,
                         1.0 if method == "exact" else sample_ratio,
+                        sample_seed,
                         verbose,
                     ),
                 )

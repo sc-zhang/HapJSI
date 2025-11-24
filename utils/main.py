@@ -40,6 +40,7 @@ def get_opts():
         type=float,
         default=0.1,
     )
+    group.add_argument("--sample_seed", help="Random seed, default=None", type=int, default=None)
     group.add_argument("-o", "--output", help="Output directory", required=True)
     group.add_argument(
         "--cmap", help='CMAP for drawing heatmap, default="RdBu_r"', default="RdBu_r"
@@ -70,6 +71,10 @@ def main():
     k = opts.k
     calc_method = opts.method
     sample_ratio = opts.sample_ratio
+    if opts.sample_seed:
+        sample_seed = opts.sample_seed
+    else:
+        sample_seed = None
     out_dir = opts.output
     cmap = opts.cmap
     pic_fmt = opts.fmt
@@ -92,6 +97,7 @@ def main():
             ssize,
             k,
             sample_ratio,
+            sample_seed,
             out_dir,
             threads,
             calc_method,
