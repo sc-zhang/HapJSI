@@ -18,7 +18,7 @@ source ~/.bash_profile
 
 ## Usage
 ```bash
-usage: kharis.py [-h] -g GENOME -l LIST [-w WINDOW] [-s STEP] [-k K] [--method {exact,sample}] [--sample_ratio SAMPLE_RATIO] -o OUTPUT [--cmap CMAP] [--fmt FMT] [--log_scale] [-t THREADS] [--verbose]
+usage: kharis.py [-h] -g GENOME -l LIST [-w WINDOW] [-s STEP] [-k K] [--method {exact,sample}] [--sample_ratio SAMPLE_RATIO] [--sample_seed SAMPLE_SEED] -o OUTPUT [--cmap CMAP] [--fmt FMT] [--log_scale] [-t THREADS] [--verbose]
 
 options:
   -h, --help            show this help message and exit
@@ -31,6 +31,8 @@ options:
                         Method for calculating jaccard similarity, could be exact or sample, default=exact
   --sample_ratio SAMPLE_RATIO
                         Sample ratio for calculating, default=0.1
+  --sample_seed SAMPLE_SEED
+                        Random seed, default=None
   -o, --output OUTPUT   Output directory
   --cmap CMAP           CMAP for drawing heatmap, default="RdBu_r"
   --fmt FMT             Heatmap file format, default="pdf"
