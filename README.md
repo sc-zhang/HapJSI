@@ -18,7 +18,7 @@ source ~/.bash_profile
 
 ## Usage
 ```bash
-usage: kharis.py [-h] -g GENOME -l LIST [-w WINDOW] [-s STEP] [-k K] [--method {exact,sample}] [--sample_ratio SAMPLE_RATIO] [--sample_seed SAMPLE_SEED] -o OUTPUT [--cmap CMAP] [--fmt FMT] [--log_scale] [-t THREADS] [--verbose]
+usage: kharis.py [-h] -g GENOME -l LIST [-w WINDOW] [-s STEP] [-k K] [--method {exact,sample}] [--sample_ratio SAMPLE_RATIO] [--sample_seed SAMPLE_SEED] -o OUTPUT [--cmap CMAP] [--fmt FMT] [--log_scale] [-t THREADS] [--verbose] [-v]
 
 options:
   -h, --help            show this help message and exit
@@ -40,6 +40,7 @@ options:
   -t, --threads THREADS
                         Threads, default=10
   --verbose             Print detail information
+  -v, --version         show program's version number and exit
 ```
 > Jaccard Similarity is defined as:  
 > $$Jaccard\ Similarity=\frac{{A}\bigcap{B}}{{A}\bigcup{B}}$$  

@@ -2,6 +2,7 @@ import argparse
 import os
 from utils import jac_calculator, plot_jac
 from utils.message import Message
+from utils.__version__ import __version__
 
 
 def get_opts():
@@ -40,7 +41,9 @@ def get_opts():
         type=float,
         default=0.1,
     )
-    group.add_argument("--sample_seed", help="Random seed, default=None", type=int, default=None)
+    group.add_argument(
+        "--sample_seed", help="Random seed, default=None", type=int, default=None
+    )
     group.add_argument("-o", "--output", help="Output directory", required=True)
     group.add_argument(
         "--cmap", help='CMAP for drawing heatmap, default="RdBu_r"', default="RdBu_r"
@@ -58,6 +61,12 @@ def get_opts():
     )
     group.add_argument(
         "--verbose", help="Print detail information", action="store_true"
+    )
+    group.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version="%(prog)s {version}".format(version=__version__),
     )
     return group.parse_args()
 
